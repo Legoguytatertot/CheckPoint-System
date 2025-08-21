@@ -1,7 +1,7 @@
 local UIS = game:GetService("UserInputService")
 
 local Player = game.Players.LocalPlayer
-local Character = Player.Character
+
 
 
 
@@ -25,6 +25,7 @@ local function LoadHrp(HRP)
 
 
 	Clone.Parent = workspace
+	
 end
 
 local function MoveHRPSave(HRP)
@@ -39,8 +40,9 @@ end
 UIS.InputBegan:Connect(function(button, p)
 	if p then return end
 	
+	local Character = Player.Character
 	local HRP = Character:FindFirstChild("HumanoidRootPart")
-	
+	print(HRP.CFrame)
 	
 	if button.KeyCode == Enum.KeyCode.E then
 		if HRP and not workspace:FindFirstChild("SavePointHRP") then
