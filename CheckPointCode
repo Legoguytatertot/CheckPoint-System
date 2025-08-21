@@ -1,7 +1,7 @@
 local UIS = game:GetService("UserInputService")
 
 local Player = game.Players.LocalPlayer
-local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
+local Character = Player.Character
 
 
 
@@ -10,7 +10,7 @@ local HRP = Player.Character:FindFirstChild("HumanoidRootPart")
 local Saved = Vector3.new(0,0,0)
 
 
-local function LoadHrp()
+local function LoadHrp(HRP)
 	local Highlight = Instance.new("Highlight")
 	Saved = HRP.CFrame
 	local Clone = HRP:Clone()
@@ -27,7 +27,8 @@ local function LoadHrp()
 	Clone.Parent = workspace
 end
 
-local function MoveHRPSave()
+local function MoveHRPSave(HRP)
+	
 	local SavePoint = workspace:FindFirstChild("SavePointHRP")
 
 	SavePoint.CFrame = HRP.CFrame
@@ -38,11 +39,14 @@ end
 UIS.InputBegan:Connect(function(button, p)
 	if p then return end
 	
+	local HRP = Character:FindFirstChild("HumanoidRootPart")
+	
+	
 	if button.KeyCode == Enum.KeyCode.E then
 		if HRP and not workspace:FindFirstChild("SavePointHRP") then
-			LoadHrp()
+			LoadHrp(HRP)
 		elseif workspace:FindFirstChild("SavePointHRP") then
-			MoveHRPSave()
+			MoveHRPSave(HRP)
 		end
 	end
 	
